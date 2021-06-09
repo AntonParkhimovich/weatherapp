@@ -20061,7 +20061,7 @@ function paintGeolocationData(){
 }
 function getGeo(){
     navigator.geolocation.getCurrentPosition((posityion) => {
-      let {coords:{latitude, longitude}} = posityion
+      const {coords:{latitude, longitude}} = posityion
       console.log(`${latitude},${longitude}`);
       getResponse(`${latitude},${longitude}`).then((response) => { 
         paintData(response)})
@@ -20105,8 +20105,8 @@ function responseNotificationData(){
     return fetch('././MOCK_DATA.json').then((response) => response.json()).then((response)=>{paintRadioInput(response)})
   }
 function paintRadioInput(data){
-    let sidebar = document.querySelector('.sidebar')
-    let notificationBody = document.querySelector('.notification-body') 
+    const sidebar = document.querySelector('.sidebar')
+    const notificationBody = document.querySelector('.notification-body') 
     data.map((arr)=> {
       sidebar.insertAdjacentHTML('beforeend', `<input type="radio" id="${arr.id}" class="radiobar" name="checkbox">`)
       notificationBody.insertAdjacentHTML('beforeend',` <div class="new-notification" id="notification${arr.id}">
@@ -20119,7 +20119,7 @@ function paintRadioInput(data){
   }
 
   function toggle(id){
-    let arrNotification =[...document.querySelectorAll('.new-notification')] 
+    const arrNotification =[...document.querySelectorAll('.new-notification')] 
     arrNotification.map((arr)=>{
       if(arr.classList[1] === 'visible'){
         arr.classList.value = "new-notification"
@@ -20128,11 +20128,11 @@ function paintRadioInput(data){
     document.querySelector(`#notification${id}`).classList.toggle('visible')
   }
   function nextNotification(button){
-    let arrRadiobutton = [...document.querySelectorAll('.radiobar')]
-    let checkedInput = document.querySelector('input[name="checkbox"]:checked')
+    const arrRadiobutton = [...document.querySelectorAll('.radiobar')]
+    const checkedInput = document.querySelector('input[name="checkbox"]:checked')
     if(button.classList[1] === 'right'){
       if(checkedInput.id != arrRadiobutton.length){
-        let nextRadiobutton =  Number(checkedInput.id)+1
+        const nextRadiobutton =  Number(checkedInput.id)+1
         toggle(`${nextRadiobutton}`)
         checkedInput.nextElementSibling.checked = true
       }if(checkedInput.id == arrRadiobutton.length){
@@ -20141,7 +20141,7 @@ function paintRadioInput(data){
       }
     }if(button.classList[1] === 'left'){
       if(checkedInput.id != arrRadiobutton[0].id){
-        let nextRadiobutton =  Number(checkedInput.id)-1
+        const nextRadiobutton =  Number(checkedInput.id)-1
         toggle(`${nextRadiobutton}`)
         checkedInput.previousElementSibling.checked = true
       }
@@ -20172,13 +20172,14 @@ function paintRadioInput(data){
   module.exports = {addNotificationApi};
 },{}],36:[function(require,module,exports){
 const {setElementInHistory} = require('./searchHistory');
+
 function paintData(data) {
     if (data.error) {
       document.querySelector(
         ".weather"
       ).innerHTML = `<h2 class="weather-response">Вы ввели некорректные данные или сервер не отвечает, попробуйте снова</h2>`;
     } else {
-      let {
+      const {
         current,
         location: { name, country, localtime },
       } = data;
@@ -20235,21 +20236,19 @@ function getResponse(responseCity) {
       `http://api.weatherstack.com/current?access_key=d13b7df89be670ac4a637e0c380afe75&query=${responseCity}`
     )
       .then((response) => response.json())
-      .then((response) => {
-        return response;
-      });
+      .then((response) => response);
   }
 
   module.exports = {getResponse};
 },{}],38:[function(require,module,exports){
 const format = require('date-fns/format')
  const lodash = require('lodash')
+
 function setElementInHistory(element){
     if(element.error){
         console.log('Запрос некорректный');
-    }else{
-        if(localStorage.getItem('history') !== null){
-            let arrHistory = JSON.parse(localStorage.getItem('history'))
+    }else if(localStorage.getItem('history') !== null){
+            const arrHistory = JSON.parse(localStorage.getItem('history'))
             element.dateResponse = format(new Date(), "MM/dd/E/yyyy")
             arrHistory.unshift(element)
             if(arrHistory.length > 5){
@@ -20257,17 +20256,16 @@ function setElementInHistory(element){
             }
             localStorage.setItem('history',JSON.stringify(arrHistory))
         }else{
-            let arrHistory = []
+            const arrHistory = []
             arrHistory.unshift(element)
             localStorage.setItem('history',JSON.stringify(arrHistory))
         }
-    }
 }
 function showSearchHistory(){
     document.querySelector('.search-history__body').innerHTML = ''
     document.querySelector('.weather').style.display = 'none'
     document.querySelector('.search-history').style.display = 'grid'
-    let data = JSON.parse(localStorage.getItem('history'))
+    const data = JSON.parse(localStorage.getItem('history'))
     if(data !==[] && data !== null){
         lodash.forEach(data, ({current, dateResponse, location: { name, country}})=>{
             document.querySelector('.search-history__body').insertAdjacentHTML('beforeend', `  <ul class="search-history__head">
@@ -20300,18 +20298,19 @@ function hideSearchHistory(){
 module.exports = {setElementInHistory, hui};
 
 },{"date-fns/format":19,"lodash":33}],39:[function(require,module,exports){
+const format = require('date-fns/format')
 const {addNotificationApi} = require('./notification');
 const {paintGeolocationData} = require('./geolocation');
 const {hui} = require('./searchHistory');
 const {getResponse} = require('./responseApi');
 const {paintData} = require('./paintData');
 const {setElementInHistory} = require('./searchHistory');
-const format = require('date-fns/format')
+
 addNotificationApi()
 
 
 
-let wrap = document.querySelector(".wrapper");
+const wrap = document.querySelector(".wrapper");
 wrap.addEventListener("click", async (e) => {
   if (e.target.closest(".header-button")) {
     if(document.querySelector('.search-history').style.display === 'grid'){
