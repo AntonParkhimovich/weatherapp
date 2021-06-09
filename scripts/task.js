@@ -1,4 +1,3 @@
-const format = require('date-fns/format')
 const {addNotificationApi} = require('./notification');
 const {paintGeolocationData} = require('./geolocation');
 const {hui} = require('./searchHistory');
@@ -31,7 +30,7 @@ wrap.addEventListener("keydown", async (e) => {
   }
 });
 paintGeolocationData()
-console.log(format(new Date(), "MM/dd/E/yyyy"));
+
 
 
 
