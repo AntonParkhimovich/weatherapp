@@ -4,7 +4,7 @@ const {hui} = require('./searchHistory');
 const {getResponse} = require('./responseApi');
 const {paintData} = require('./paintData');
 const {setElementInHistory} = require('./searchHistory');
-import "../style.css";
+import "./style.css";
 addNotificationApi()
 
 

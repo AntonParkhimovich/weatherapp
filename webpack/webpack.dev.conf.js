@@ -12,7 +12,7 @@ module.exports = {
     port: 8080,
 },
   entry: {
-    main: path.resolve(__dirname, './src/task.js'),
+    main: path.resolve(__dirname, '../src/task.js'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),
