@@ -1,6 +1,6 @@
-const { setElementInHistory } = require('./searchHistory');
+import { setElementInHistory } from './searchHistory';
 
-function paintData(data) {
+export function paintData(data) {
   if (data.error) {
     document.querySelector(
       '.weather'
@@ -55,5 +55,3 @@ function paintData(data) {
                                                   </div>`;
   }
 }
-
-module.exports = { paintData };

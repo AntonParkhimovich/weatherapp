@@ -1,9 +1,7 @@
-
-const { paintGeolocationData } = require('./geolocation');
-const { searchHistory } = require('./searchHistory');
-const { getResponse } = require('./responseApi');
-const { paintData } = require('./paintData');
-const { setElementInHistory } = require('./searchHistory');
+import paintGeolocationData from './geolocation';
+import { searchHistory, setElementInHistory } from './searchHistory';
+import { getResponse } from './responseApi';
+import { paintData } from './paintData';
 
 const wrap = document.querySelector('.wrapper');
 wrap.addEventListener('click', async (e) => {

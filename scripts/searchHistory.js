@@ -1,7 +1,7 @@
 const format = require('date-fns/format');
 const lodash = require('lodash');
 
-function setElementInHistory(element) {
+export function setElementInHistory(element) {
   if (element.error) {
     console.log('Запрос некорректный');
   } else if (localStorage.getItem('history') !== null) {
@@ -51,7 +51,7 @@ function hideSearchHistory() {
   document.querySelector('.weather').style.display = 'flex';
   document.querySelector('.search-history__body').innerHTML = '';
 }
-function searchHistory() {
+export function searchHistory() {
   showSearchHistory();
   document.querySelector('.search-history').addEventListener('click', (e) => {
     if (e.target.closest('.close-history')) {
@@ -59,5 +59,3 @@ function searchHistory() {
     }
   });
 }
-
-module.exports = { setElementInHistory,searchHistory};

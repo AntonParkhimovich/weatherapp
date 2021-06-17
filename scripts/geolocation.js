@@ -1,5 +1,5 @@
-const { paintData } = require('./paintData');
-const { getResponse } = require('./responseApi');
+import { paintData } from './paintData';
+import { getResponse } from './responseApi';
 
 function getGeo() {
   navigator.geolocation.getCurrentPosition((posityion) => {
@@ -12,7 +12,7 @@ function getGeo() {
   });
 }
 
-function paintGeolocationData() {
+export function paintGeolocationData() {
   document
     .querySelector('.header-geolocation')
     .addEventListener('click', (e) => {
@@ -21,5 +21,3 @@ function paintGeolocationData() {
       }
     });
 }
-
-module.exports = { paintGeolocationData };
