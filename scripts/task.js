@@ -1,6 +1,6 @@
 
 const { paintGeolocationData } = require('./geolocation');
-const { hui } = require('./searchHistory');
+const { searchHistory } = require('./searchHistory');
 const { getResponse } = require('./responseApi');
 const { paintData } = require('./paintData');
 const { setElementInHistory } = require('./searchHistory');
@@ -12,7 +12,7 @@ wrap.addEventListener('click', async (e) => {
       setElementInHistory(
         await getResponse(document.querySelector('.header-input').value)
       );
-      hui();
+      searchHistory();
     } else {
       paintData(
         await getResponse(document.querySelector('.header-input').value)
@@ -20,7 +20,7 @@ wrap.addEventListener('click', async (e) => {
     }
   }
   if (e.target.closest('.header-button--history')) {
-    hui();
+    searchHistory();
   }
 });
 wrap.addEventListener('keydown', async (e) => {

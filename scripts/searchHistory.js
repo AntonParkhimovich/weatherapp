@@ -51,7 +51,7 @@ function hideSearchHistory() {
   document.querySelector('.weather').style.display = 'flex';
   document.querySelector('.search-history__body').innerHTML = '';
 }
-function hui() {
+function searchHistory() {
   showSearchHistory();
   document.querySelector('.search-history').addEventListener('click', (e) => {
     if (e.target.closest('.close-history')) {
@@ -60,4 +60,4 @@ function hui() {
   });
 }
 
-module.exports = { setElementInHistory, hui };
+module.exports = { setElementInHistory,searchHistory};
