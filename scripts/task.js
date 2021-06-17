@@ -1,11 +1,9 @@
-const { addNotificationApi } = require('./notification');
+
 const { paintGeolocationData } = require('./geolocation');
 const { hui } = require('./searchHistory');
 const { getResponse } = require('./responseApi');
 const { paintData } = require('./paintData');
 const { setElementInHistory } = require('./searchHistory');
-
-addNotificationApi();
 
 const wrap = document.querySelector('.wrapper');
 wrap.addEventListener('click', async (e) => {
