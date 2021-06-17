@@ -20075,131 +20075,7 @@ function paintGeolocationData() {
 
 module.exports = { paintGeolocationData };
 
-},{"./paintData":36,"./responseApi":37}],35:[function(require,module,exports){
-function printNotification() {
-  document.querySelector(
-    '.notification'
-  ).innerHTML = `     <div class="notification-head">
-  <button class="button-close"></button>
-</div>
-<div class="notification-body">
-</div>
-<div class="notification-footer">
-  <input type="checkbox" name="disable" id="disable-notification" class="disable-checkbox">
-  <div class="slideshow">
-      <p><i class="arrow left"></i></p>
-      <div class="sidebar">
-      </div>
-      <p><i class="arrow right"></i></p>
-  </div>
-</div>`;
-  document.querySelector('.notification').style.display = 'block';
-}
-function toggle(id) {
-  const arrNotification = [...document.querySelectorAll('.new-notification')];
-  arrNotification.map((arr) => {
-    const notificationVisible = arr.classList;
-    if (notificationVisible[1] === 'visible') {
-      notificationVisible.value = 'new-notification';
-    }
-    return null;
-  });
-  document.querySelector(`#notification${id}`).classList.toggle('visible');
-}
-function paintRadioInput(data) {
-  const sidebar = document.querySelector('.sidebar');
-  const notificationBody = document.querySelector('.notification-body');
-  data.map((arr) => {
-    sidebar.insertAdjacentHTML(
-      'beforeend',
-      `<input type="radio" id="${arr.id}" class="radiobar" name="checkbox">`
-    );
-    notificationBody.insertAdjacentHTML(
-      'beforeend',
-      ` <div class="new-notification" id="notification${arr.id}">
-    <h2 class="notification-title">${arr.title}</h2>
-    <p class="notification-text">${arr.phrase}</p>
-</div>`
-    );
-    return null;
-  });
-  document.querySelector('.radiobar').checked = true;
-  toggle('1');
-}
-function responseNotificationData() {
-  return fetch('././MOCK_DATA.json')
-    .then((response) => response.json())
-    .then((response) => {
-      paintRadioInput(response);
-    });
-}
-
-function nextNotification(button) {
-  const arrRadiobutton = [...document.querySelectorAll('.radiobar')];
-  const checkedInput = document.querySelector('input[name="checkbox"]:checked');
-  if (button.classList[1] === 'right') {
-    if (checkedInput.id !== arrRadiobutton.length) {
-      const nextRadiobutton = Number(checkedInput.id) + 1;
-      toggle(`${nextRadiobutton}`);
-      checkedInput.nextElementSibling.checked = true;
-    }
-    if (checkedInput.id === arrRadiobutton.length) {
-      arrRadiobutton[0].checked = true;
-      toggle(`${arrRadiobutton[0].id}`);
-    }
-  }
-  if (button.classList[1] === 'left') {
-    if (checkedInput.id !== arrRadiobutton[0].id) {
-      const nextRadiobutton = Number(checkedInput.id) - 1;
-      toggle(`${nextRadiobutton}`);
-      checkedInput.previousElementSibling.checked = true;
-    }
-    if (checkedInput.id === arrRadiobutton[0].id) {
-      arrRadiobutton[arrRadiobutton.length - 1].checked = true;
-      toggle(`${arrRadiobutton[arrRadiobutton.length - 1].id}`);
-    }
-  }
-}
-function checkNotification() {
-  if (localStorage.getItem('notification') !== null) {
-    if (localStorage.getItem('notification') === 'enable') {
-      responseNotificationData();
-    }
-    if (localStorage.getItem('notification') === 'disabled') {
-      document.querySelector('.notification').style.display = 'none';
-      document.querySelector('.disable-checkbox').checked = true;
-    }
-  }
-}
-function disableNotification(e) {
-  if (e.target.checked === true) {
-    localStorage.setItem('notification', 'disabled');
-    document.querySelector('.notification').style.display = 'none';
-  } else {
-    localStorage.setItem('notification', 'enable');
-  }
-}
-
-function addNotificationApi() {
-  printNotification();
-  checkNotification();
-  responseNotificationData();
-  document.querySelector('.notification').addEventListener('click', (e) => {
-    if (e.target.closest('.radiobar')) {
-      toggle(e.target.id);
-    }
-    if (e.target.closest('.arrow')) {
-      nextNotification(e.target);
-    }
-    if (e.target.closest('.disable-checkbox')) {
-      disableNotification(e);
-    }
-  });
-}
-
-module.exports = { addNotificationApi };
-
-},{}],36:[function(require,module,exports){
+},{"./paintData":35,"./responseApi":36}],35:[function(require,module,exports){
 const { setElementInHistory } = require('./searchHistory');
 
 function paintData(data) {
@@ -20260,10 +20136,10 @@ function paintData(data) {
 
 module.exports = { paintData };
 
-},{"./searchHistory":38}],37:[function(require,module,exports){
+},{"./searchHistory":37}],36:[function(require,module,exports){
 function getResponse(responseCity) {
   return fetch(
-    `http://api.weatherstack.com/current?access_key=d13b7df89be670ac4a637e0c380afe75&query=${responseCity}`
+    `http://api.weatherstack.com/current?access_key=6ef04114106f0d26e10965a03e92a579&query=${responseCity}`
   )
     .then((response) => response.json())
     .then((response) => response);
@@ -20271,7 +20147,7 @@ function getResponse(responseCity) {
 
 module.exports = { getResponse };
 
-},{}],38:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 const format = require('date-fns/format');
 const lodash = require('lodash');
 
@@ -20336,15 +20212,13 @@ function hui() {
 
 module.exports = { setElementInHistory, hui };
 
-},{"date-fns/format":19,"lodash":33}],39:[function(require,module,exports){
-const { addNotificationApi } = require('./notification');
+},{"date-fns/format":19,"lodash":33}],38:[function(require,module,exports){
+
 const { paintGeolocationData } = require('./geolocation');
 const { hui } = require('./searchHistory');
 const { getResponse } = require('./responseApi');
 const { paintData } = require('./paintData');
 const { setElementInHistory } = require('./searchHistory');
-
-addNotificationApi();
 
 const wrap = document.querySelector('.wrapper');
 wrap.addEventListener('click', async (e) => {
@@ -20371,4 +20245,4 @@ wrap.addEventListener('keydown', async (e) => {
 });
 paintGeolocationData();
 
-},{"./geolocation":34,"./notification":35,"./paintData":36,"./responseApi":37,"./searchHistory":38}]},{},[39]);
+},{"./geolocation":34,"./paintData":35,"./responseApi":36,"./searchHistory":37}]},{},[38]);
