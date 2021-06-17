@@ -1,17 +1,17 @@
-const {setElementInHistory} = require('./searchHistory');
+const { setElementInHistory } = require('./searchHistory');
 
 function paintData(data) {
-    if (data.error) {
-      document.querySelector(
-        ".weather"
-      ).innerHTML = `<h2 class="weather-response">Вы ввели некорректные данные или сервер не отвечает, попробуйте снова</h2>`;
-    } else {
-      const {
-        current,
-        location: { name, country, localtime },
-      } = data;
-      setElementInHistory(data)
-      document.querySelector(".weather").innerHTML = `<div class="weather-head">
+  if (data.error) {
+    document.querySelector(
+      '.weather'
+    ).innerHTML = `<h2 class="weather-response">Вы ввели некорректные данные или сервер не отвечает, попробуйте снова</h2>`;
+  } else {
+    const {
+      current,
+      location: { name, country, localtime },
+    } = data;
+    setElementInHistory(data);
+    document.querySelector('.weather').innerHTML = `<div class="weather-head">
                                                       <img class="icon" src=${
                                                         current.weather_icons[0]
                                                       } alt="weather-pic">
@@ -53,7 +53,7 @@ function paintData(data) {
                                                       </div>
                                                   </div>
                                                   </div>`;
-    }
   }
+}
 
-  module.exports = {paintData};
+module.exports = { paintData };
