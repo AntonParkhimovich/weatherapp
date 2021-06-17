@@ -1,4 +1,3 @@
-# weatherapp
 # WeatherApp
 ---
 ## Content
