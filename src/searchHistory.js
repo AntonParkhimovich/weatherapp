@@ -1,4 +1,4 @@
-const format = require('date-fns/format');
+import { format } from 'date-fns';
 const lodash = require('lodash');
 
 export function setElementInHistory(element) {

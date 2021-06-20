@@ -36,9 +36,18 @@ To clear your history click button <*Clear*>
  * Eslint-plugin-prettier v3.4.0,
  * Prettier v2.3.1,
  * Lodash v4.17.21,
- * browserify v17.0.0,
- * watchify v4.0.0,
+ * file-loader  v6.2.0
+ * html-webpack-plugin v5.3.1
+ * style-loader v2.0.0
+ * webpack v5.39.1
+ * webpack-cli v4.7.2
+ * webpack-dev-server v3.11.2
  * date-fns v2.22.1
+ * babel/core v7.14.6 
+ * babel/plugin-transform-runtime v7.14.5
+ * babel/preset-env v7.14.5
+ * babel-loader v8.2.2
+ * clean-webpack-plugin v4.0.0-alpha.0
     
     
 ---
@@ -57,10 +66,10 @@ $npm run lint:fix
 ---
 ### For build  this app use command: 
 ```
-$ npm run build-js
+$ npm run build
 ```
 
-### For build run watchify: 
+### For build run dev mode: 
 ```
-$ npm run watch-js
+$ npm run start
 ```

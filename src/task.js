@@ -1,7 +1,8 @@
-import paintGeolocationData from './geolocation';
+import {paintGeolocationData} from './geolocation';
 import { searchHistory, setElementInHistory } from './searchHistory';
 import { getResponse } from './responseApi';
 import { paintData } from './paintData';
+import './style.css'
 
 const wrap = document.querySelector('.wrapper');
 wrap.addEventListener('click', async (e) => {
