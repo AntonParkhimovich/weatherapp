@@ -11,7 +11,7 @@ const path = require('path');
     // new  CleanWebpackPlugin ( ),
      new HtmlWebpackPlugin({
        title: 'Production',
-      template: './src/index.html'
+      template: 'index.html'
      }),
      new webpack.HotModuleReplacementPlugin(),
      
